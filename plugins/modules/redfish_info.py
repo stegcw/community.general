@@ -248,6 +248,14 @@ EXAMPLES = '''
       username: "{{ username }}"
       password: "{{ password }}"
 
+  - name: Get service identification
+    community.general.redfish_config:
+      category: Manager
+      command: GetServiceIdentification
+      baseuri: "{{ baseuri }}"
+      username: "{{ username }}"
+      password: "{{ password }}"
+
   - name: Get software inventory
     community.general.redfish_info:
       category: Update
