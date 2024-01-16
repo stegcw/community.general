@@ -377,7 +377,7 @@ CATEGORY_COMMANDS_ALL = {
     "Update": ["GetFirmwareInventory", "GetFirmwareUpdateCapabilities", "GetSoftwareInventory",
                "GetUpdateStatus"],
     "Manager": ["GetManagerNicInventory", "GetVirtualMedia", "GetLogs", "GetNetworkProtocols",
-                "GetHealthReport", "GetHostInterfaces", "GetManagerInventory"],
+                "GetHealthReport", "GetHostInterfaces", "GetManagerInventory", "GetServiceIdentification"],
 }
 
 CATEGORY_COMMANDS_DEFAULT = {
@@ -403,6 +403,7 @@ def main():
             auth_token=dict(no_log=True),
             timeout=dict(type='int'),
             update_handle=dict(),
+            manager=dict(),
         ),
         required_together=[
             ('username', 'password'),
@@ -436,6 +437,9 @@ def main():
 
     # update handle
     update_handle = module.params['update_handle']
+
+    # manager
+    manager = module.params['manager']
 
     # Build root URI
     root_uri = "https://" + module.params['baseuri']
@@ -587,6 +591,8 @@ def main():
                     result["host_interfaces"] = rf_utils.get_hostinterfaces()
                 elif command == "GetManagerInventory":
                     result["manager"] = rf_utils.get_multi_manager_inventory()
+                elif command == "GetServiceIdentification":
+                    result["service_id"] = rf_utils.get_service_identification(manager)
 
     # Return data back
     module.exit_json(redfish_facts=result)
