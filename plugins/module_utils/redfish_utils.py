@@ -3389,8 +3389,9 @@ class RedfishUtils(object):
             if len(self.manager_uris) == 1:
                 manager = self.manager_uris[0]
             elif len(self.manager_uris) > 1:
+                managers=[ i.split('/')[-1] for i in self.manager_uris ]
                 self.module.fail_json(msg=[
-                    f"Multiple manager identities were found: {[ i.split('/')[-1] for i in self.manager_uris ]}", 
+                    "Multiple manager identities were found: %s" % managers, 
                     "Please specify by using the 'manager' parameter in your playbook"])
             elif len(self.manager_uris) == 0:
                 self.module.fail_json(msg="No manager identities were found")
