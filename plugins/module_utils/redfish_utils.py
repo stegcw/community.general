@@ -3397,9 +3397,9 @@ class RedfishUtils(object):
         response = self.get_request(self.root_uri + '/redfish/v1/Managers/' + manager, override_headers=None)
         try:
             result['service_identification'] = response['data']['ServiceIdentification']
-            result['ret'] = True
         except:
             self.module.fail_json(msg=f"Service ID not found for manager {manager}")
+        result['ret'] = True
         return result 
 
     def set_session_service(self, sessions_config):
