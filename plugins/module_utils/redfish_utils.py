@@ -3387,7 +3387,7 @@ class RedfishUtils(object):
         result = {}
         if manager is None:
             if len(self.manager_uris) == 1:
-                manager = self.manager_uris[0]
+                manager = self.manager_uris[0].split('/')[-1]
             elif len(self.manager_uris) > 1:
                 managers=[ i.split('/')[-1] for i in self.manager_uris ]
                 self.module.fail_json(msg=[
