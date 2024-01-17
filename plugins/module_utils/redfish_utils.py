@@ -3384,10 +3384,10 @@ class RedfishUtils(object):
         return self.aggregate_managers(self.get_manager_inventory)
 
     def get_service_identification(self, manager_uri):
-        if manager_uri == None:
+        if manager_uri is None:
             manager_uri = self.manager_uris[0]
         #response = get_request(self.root_uri + manager_uri, override_headers=None):
-        return {'ret': 'lol', 'msg': self.root_uri + self.systems_uri } 
+        return {'ret': 'lol', 'msg': self.root_uri + self.systems_uri}
 
     def set_session_service(self, sessions_config):
         if sessions_config is None:

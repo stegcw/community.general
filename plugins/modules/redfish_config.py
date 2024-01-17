@@ -284,7 +284,7 @@ EXAMPLES = '''
       username: "{{ username }}"
       password: "{{ password }}"
 
-  - name: Set Service Identification 
+  - name: Set Service Identification
     community.general.redfish_config:
       category: Manager
       command: SetServiceIdentification
