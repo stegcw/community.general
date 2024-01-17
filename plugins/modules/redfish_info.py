@@ -55,6 +55,12 @@ options:
       - Security token for authenticating to OOB controller.
     type: str
     version_added: 2.3.0
+  manager:
+    description:
+      - Name of manager on OOB controller to target.
+    default: 'null'
+    type: str
+    version_added: '8.2.0'
   timeout:
     description:
       - Timeout in seconds for HTTP requests to OOB controller.
@@ -252,7 +258,7 @@ EXAMPLES = '''
     community.general.redfish_config:
       category: Manager
       command: GetServiceIdentification
-      manager_id: "{{ manager_id }}" #optional
+      manager: "{{ manager }}"
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
