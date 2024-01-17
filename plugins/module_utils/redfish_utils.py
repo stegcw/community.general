@@ -3391,12 +3391,12 @@ class RedfishUtils(object):
                 manager = self.manager_uris[0].split('/')[-1]
             elif len(self.manager_uris) > 1:
                 entries = self.get_multi_manager_inventory()['entries']
-                managers = [ m[0]['manager_uri'] for m in entries if m[1].get('ServiceIdentification') ]
+                managers = [m[0]['manager_uri'] for m in entries if m[1].get('ServiceIdentification')]
                 if len(managers) == 1:
                     manager = managers[0].split('/')[-1]
                 else:
                     self.module.fail_json(msg=[
-                        "Multiple managers with ServiceIdentification were found: %s" % str(managers), 
+                        "Multiple managers with ServiceIdentification were found: %s" % str(managers),
                         "Please specify by using the 'manager' parameter in your playbook"])
             elif len(self.manager_uris) == 0:
                 self.module.fail_json(msg="No manager identities were found")
