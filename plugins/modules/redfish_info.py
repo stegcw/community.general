@@ -252,6 +252,7 @@ EXAMPLES = '''
     community.general.redfish_config:
       category: Manager
       command: GetServiceIdentification
+      manager_id: "{{ manager_id }}" #optional
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
