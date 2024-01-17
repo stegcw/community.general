@@ -3399,7 +3399,7 @@ class RedfishUtils(object):
         try:
             result['service_identification'] = response['data']['ServiceIdentification']
         except:
-            self.module.fail_json(msg=f"Service ID not found for manager {manager}")
+            self.module.fail_json(msg="Service ID not found for manager %s" % manager)
         result['ret'] = True
         return result 
 
