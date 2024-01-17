@@ -3389,19 +3389,19 @@ class RedfishUtils(object):
             if len(self.manager_uris) == 1:
                 manager = self.manager_uris[0].split('/')[-1]
             elif len(self.manager_uris) > 1:
-                managers=[ i.split('/')[-1] for i in self.manager_uris ]
+                managers = [i.split('/')[-1] for i in self.manager_uris]
                 self.module.fail_json(msg=[
-                    "Multiple manager identities were found: %s" % managers, 
+                    "Multiple manager identities were found: %s" % managers,
                     "Please specify by using the 'manager' parameter in your playbook"])
             elif len(self.manager_uris) == 0:
                 self.module.fail_json(msg="No manager identities were found")
         response = self.get_request(self.root_uri + '/redfish/v1/Managers/' + manager, override_headers=None)
         try:
             result['service_identification'] = response['data']['ServiceIdentification']
-        except:
+        except Exception as e:
             self.module.fail_json(msg="Service ID not found for manager %s" % manager)
         result['ret'] = True
-        return result 
+        return result
 
     def set_session_service(self, sessions_config):
         if sessions_config is None:
