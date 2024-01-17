@@ -3383,11 +3383,24 @@ class RedfishUtils(object):
     def get_multi_manager_inventory(self):
         return self.aggregate_managers(self.get_manager_inventory)
 
-    def get_service_identification(self, manager_uri):
-        if manager_uri is None:
-            manager_uri = self.manager_uris[0]
-        #response = get_request(self.root_uri + manager_uri, override_headers=None):
-        return {'ret': 'lol', 'msg': self.root_uri + self.systems_uri}
+    def get_service_identification(self, manager):
+        result = {}
+        if manager is None:
+            if len(self.manager_uris) == 1:
+                manager = self.manager_uris[0]
+            elif len(self.manager_uris) > 1:
+                self.module.fail_json(msg=[
+                    f"Multiple manager identities were found: {[ i.split('/')[-1] for i in self.manager_uris ]}", 
+                    "Please specify by using the 'manager' parameter in your playbook"])
+            elif len(self.manager_uris) == 0:
+                self.module.fail_json(msg="No manager identities were found")
+        response = self.get_request(self.root_uri + '/redfish/v1/Managers/' + manager, override_headers=None)
+        try:
+          result['service_identification'] = response['data']['ServiceIdentification']
+          result['ret'] = True
+        except:
+          self.module.fail_json(msg=f"Service ID not found for manager {manager}")
+        return result 
 
     def set_session_service(self, sessions_config):
         if sessions_config is None:
