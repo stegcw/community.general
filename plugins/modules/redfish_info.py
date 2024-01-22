@@ -255,7 +255,7 @@ EXAMPLES = '''
       password: "{{ password }}"
 
   - name: Get service identification
-    community.general.redfish_config:
+    community.general.redfish_info:
       category: Manager
       command: GetServiceIdentification
       manager: "{{ manager }}"
