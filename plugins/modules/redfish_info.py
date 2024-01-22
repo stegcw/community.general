@@ -58,7 +58,6 @@ options:
   manager:
     description:
       - Name of manager on OOB controller to target.
-    default: 'null'
     type: str
     version_added: '8.2.0'
   timeout:
