@@ -88,12 +88,6 @@ options:
       - ID of the System, Manager or Chassis to modify.
     type: str
     version_added: '0.2.0'
-  manager:
-    description:
-      - Name of manager on OOB controller to target.
-    default: 'null'
-    type: str
-    version_added: '8.2.0'
   nic_addr:
     required: false
     description:
@@ -286,16 +280,6 @@ EXAMPLES = '''
       hostinterface_config:
         InterfaceEnabled: true
       hostinterface_id: "2"
-      baseuri: "{{ baseuri }}"
-      username: "{{ username }}"
-      password: "{{ password }}"
-
-  - name: Set Service Identification
-    community.general.redfish_config:
-      category: Manager
-      command: SetServiceIdentification
-      manager: "{{ manager }}"
-      service_id: "{{ service_id }}"
       baseuri: "{{ baseuri }}"
       username: "{{ username }}"
       password: "{{ password }}"
